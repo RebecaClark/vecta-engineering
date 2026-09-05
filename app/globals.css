@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface: #121315;
+  --color-surface-dim: #121315;
+  --color-surface-bright: #38393b;
+  --color-surface-container-lowest: #0d0e10;
+  --color-surface-container-low: #1b1c1e;
+  --color-surface-container: #1f2022;
+  --color-surface-container-high: #292a2c;
+  --color-surface-container-highest: #343537;
+  --color-on-surface: #e3e2e5;
+  --color-on-surface-variant: #d1c5b8;
+  --color-inverse-surface: #e3e2e5;
+  --color-inverse-on-surface: #303033;
+  --color-outline: #998f83;
+  --color-outline-variant: #4d463c;
+  --color-surface-tint: #e0c298;
+  --color-primary: #c5a880;
+  --color-primary-hover: #d8bc94;
+  --color-primary-container: #c5a880;
+  --color-on-primary: #281800;
+  --color-on-primary-container: #513d1d;
+  --color-inverse-primary: #725b38;
+  --color-primary-fixed: #fedeb2;
+  --color-primary-fixed-dim: #e0c298;
+  --color-secondary: #c4c6ce;
+  --color-on-secondary: #2d3136;
+  --color-secondary-container: #43474d;
+  --color-on-secondary-container: #b2b5bc;
+  --color-tertiary: #c6c7cd;
+  --color-on-tertiary: #2e3135;
+  --color-tertiary-container: #aaacb1;
+  --color-on-tertiary-container: #3d4045;
+  --color-background: #0d0e10;
+  --color-on-background: #e3e2e5;
+
+  --font-space: var(--font-space-grotesk), sans-serif;
+  --font-inter: var(--font-inter), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #0d0e10;
+    color: #e3e2e5;
+    font-family: var(--font-inter), sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Miesian sharp discipline: 0px border radius everywhere */
+  *, ::before, ::after {
+    border-radius: 0 !important;
+  }
+
+  /* Accessible focus rings */
+  *:focus-visible {
+    outline: 1px solid #c5a880 !important;
+    outline-offset: 2px;
+  }
+}
+
+/* Monograph architectural gridline pattern */
+.bg-architectural-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+}
+
+.bg-architectural-grid-fine {
+  background-image: 
+    linear-gradient(to right, rgba(197, 168, 128, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(197, 168, 128, 0.04) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+}
+
+/* Hairline borders */
+.editorial-border-b {
+  border-bottom: 1px solid rgba(153, 143, 131, 0.18);
+}
+.editorial-border-t {
+  border-top: 1px solid rgba(153, 143, 131, 0.18);
+}
+.editorial-border-r {
+  border-right: 1px solid rgba(153, 143, 131, 0.18);
+}
+.editorial-border-l {
+  border-left: 1px solid rgba(153, 143, 131, 0.18);
+}
+
+/* Hide scrollbar for seamless monograph look */
+::-webkit-scrollbar {
+  display: none;
+}
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

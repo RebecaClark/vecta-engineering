@@ -1,0 +1,142 @@
+// Vecta Engineering — Lead Generation Data Model
+//
+// STATUS: Not yet activated. Phase 1 runs on MockLeadService (in-memory).
+// To activate: `npm install prisma @prisma/client`, set DATABASE_URL,
+// run `npx prisma migrate dev`, then implement PrismaLeadService against
+// the LeadService interface and select it in lib/services/index.ts.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTING
+  QUALIFIED
+  MEETING
+  PROPOSAL
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum LeadPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model Lead {
+  id                   String   @id @default(uuid())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  status               LeadStatus @default(NEW)
+  leadScore            Int
+  priority             LeadPriority
+  qualificationReason  String   @db.Text
+  assignedSalesperson  String?
+
+  consentAccepted      Boolean
+  consentAcceptedAt    DateTime
+  consentPolicyVersion String
+
+  contact     LeadContact?
+  project     LeadProject?
+  documents   LeadDocument[]
+  attribution LeadAttribution?
+  events      LeadEvent[]
+
+  @@map("leads")
+  @@index([status])
+  @@index([leadScore])
+  @@index([createdAt])
+}
+
+model LeadContact {
+  id      String @id @default(uuid())
+  leadId  String @unique
+  lead    Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  name    String
+  company String
+  role    String
+  email   String
+  phone   String
+
+  @@map("lead_contacts")
+  @@index([email])
+}
+
+model LeadProject {
+  id                  String @id @default(uuid())
+  leadId              String @unique
+  lead                Lead   @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  type                String
+  location            String
+  landStatus          String
+  landArea            String?
+  builtArea           String
+  projectStage        String
+  estimatedInvestment String
+  expectedStart       String
+  servicesRequired    String[] // Postgres text[]
+  description         String?  @db.Text
+
+  @@map("lead_projects")
+  @@index([type])
+  @@index([location])
+}
+
+model LeadDocument {
+  id             String   @id @default(uuid())
+  leadId         String
+  lead           Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  fileName       String
+  internalRef    String   // opaque storage reference; never a public URL
+  fileType       String
+  fileSizeBytes  Int
+  uploadedAt     DateTime @default(now())
+
+  @@map("lead_documents")
+  @@index([leadId])
+}
+
+model LeadAttribution {
+  id          String  @id @default(uuid())
+  leadId      String  @unique
+  lead        Lead    @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmTerm     String?
+  utmContent  String?
+  referrer    String?
+  landingPage String?
+  device      String?
+
+  @@map("lead_attribution")
+}
+
+model LeadEvent {
+  id        String   @id @default(uuid())
+  leadId    String
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  type      String
+  actor     String // "SYSTEM" | "SALESPERSON"
+  payload   Json
+  createdAt DateTime @default(now())
+
+  @@map("lead_events")
+  @@index([leadId])
+  @@index([type])
+}
