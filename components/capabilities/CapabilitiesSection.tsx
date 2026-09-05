@@ -39,7 +39,7 @@ export const CapabilitiesSection: React.FC = () => {
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Sticky Meta Left Column */}
-          <div className="lg:col-span-4 flex flex-col justify-between space-y-6 lg:sticky lg:top-28">
+          <div className="lg:col-span-4 flex flex-col space-y-6 lg:sticky lg:top-28">
             <div className="space-y-3">
               <span className="font-mono text-[11px] text-[#c5a880] uppercase tracking-widest">
                 SEÇÃO 04 // COMPETÊNCIAS ESTRUTURAIS
