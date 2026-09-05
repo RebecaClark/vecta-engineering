@@ -10,14 +10,15 @@ export const CapabilitiesSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const { gsap } = getGSAP();
+const { gsap, ScrollTrigger } = getGSAP();
     if (!sectionRef.current) return;
 
-    const ctx = gsap.context(() => {
+const ctx = gsap.context(() => {
       gsap.from(".cap-row", {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 75%",
+          invalidateOnRefresh: true,
         },
         y: 20,
         opacity: 0,
@@ -25,6 +26,9 @@ export const CapabilitiesSection: React.FC = () => {
         stagger: 0.1,
         ease: "power2.out",
       });
+      // Rede de segurança: força recálculo do ScrollTrigger depois que
+      // vídeo/imagens da página terminarem de carregar e alterarem a altura.
+      window.addEventListener("load", () => ScrollTrigger.refresh());
     }, sectionRef);
 
     return () => ctx.revert();
