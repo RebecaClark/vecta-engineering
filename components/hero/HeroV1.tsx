@@ -247,8 +247,8 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
 
           {/* Right Column: Tectonic Evolution Controller & CTAs */}
           <div className="lg:col-span-4 flex flex-col space-y-4 sm:space-y-6 lg:items-end">
-            {/* Progression Mini-Selector */}
-            <div className="w-full max-w-sm bg-[#0d0e10]/85 backdrop-blur-md p-3.5 sm:p-4 border border-[#998f83]/30">
+{/* Progression Mini-Selector */}
+            <div className="hidden lg:block w-full max-w-sm bg-[#0d0e10]/85 backdrop-blur-md p-3.5 sm:p-4 border border-[#998f83]/30">
               <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#998f83]/20">
                 <span className="font-mono text-[10px] text-[#8e9196] uppercase tracking-wider">
                   EVOLUÇÃO TECTÔNICA
