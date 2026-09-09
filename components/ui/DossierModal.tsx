@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { X, ArrowRight, ShieldCheck, Download, CheckCircle2 } from "lucide-react";
 import { ProjectItem } from "@/lib/projects-data";
-import { buildWhatsAppLink } from "@/lib/config/whatsapp-config";
 
 interface DossierModalProps {
   project: ProjectItem | null;
@@ -19,19 +18,6 @@ export const DossierModal: React.FC<DossierModalProps> = ({ project, isOpen, onC
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    const message = [
-      "NOVA SOLICITAÇÃO DE DOSSIÊ — VECTA ENGINEERING",
-      "",
-      `Projeto de referência: ${project.title} (${project.ref})`,
-      `Signatário: ${formData.name}`,
-      `Instituição: ${formData.organization}`,
-      `E-mail: ${formData.email}`,
-    ].join("\n");
-
-    // Abre o WhatsApp da empresa com a mensagem já preenchida com os dados do cliente.
-    window.open(buildWhatsAppLink(message), "_blank", "noopener,noreferrer");
-
     setFormSubmitted(true);
   };
 

@@ -36,14 +36,21 @@
   --color-on-background: #e3e2e5;
 
   --font-space: var(--font-space-grotesk), sans-serif;
+  --font-headline: var(--font-space-grotesk), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 5rem;
+  }
+
+  /* Custom cursor: hide native cursor on non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    html, body, a, button {
+      cursor: none !important;
+    }
   }
 
   html, body {
@@ -103,5 +110,65 @@
 * {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Scrollytelling wireframe scanline animation */
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 0; }
+  15% { opacity: 0.85; }
+  85% { opacity: 0.85; }
+  100% { transform: translateY(600%); opacity: 0; }
+}
+
+.animate-scanline {
+  animation: scanline 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Technical blueprint corner marker */
+.blueprint-corner {
+  position: relative;
+}
+.blueprint-corner::before {
+  content: "+";
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(197, 168, 128, 0.5);
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* Dual infinite marquee animations */
+@keyframes marquee-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 32s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 32s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
 }
 

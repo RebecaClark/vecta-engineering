@@ -131,8 +131,10 @@ export const HeroVideo = forwardRef<HeroVideoHandle, HeroVideoProps>(
             if (videoRef.current) {
               const cur = videoRef.current.currentTime;
               const dur = videoRef.current.duration || 22.18;
-              setCurrentTime(cur);
-              setDuration(dur);
+              if (!isHeroRevealed) {
+                setCurrentTime(cur);
+                setDuration(dur);
+              }
               if (onTimeUpdate) {
                 onTimeUpdate(cur, dur);
               }
@@ -153,12 +155,18 @@ export const HeroVideo = forwardRef<HeroVideoHandle, HeroVideoProps>(
           }`}
         />
 
-        {/* Bottom narrative grounding vignette */}
+        {/* Deep atmospheric fog and seamless fade-to-black ground fusion */}
         <div
           aria-hidden="true"
-          className={`absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-[#0d0e10] via-[#0d0e10]/75 to-transparent h-96 pointer-events-none transition-opacity duration-1000 ${
-            isHeroRevealed ? "opacity-100" : "opacity-30"
-          }`}
+          className="absolute inset-x-0 bottom-0 z-10 h-[55vh] min-h-[420px] pointer-events-none"
+          style={{
+            background: "linear-gradient(to bottom, transparent 35%, rgba(13, 14, 16, 0.4) 65%, rgba(13, 14, 16, 0.85) 85%, #0d0e10 100%)",
+          }}
+        />
+        {/* Grounding fog right at base ensuring streets/ground dissolve into #0d0e10 */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 z-10 h-48 pointer-events-none bg-gradient-to-t from-[#0d0e10] via-[#0d0e10]/90 to-transparent"
         />
 
         {/* Left-side typographic contrast veil */}

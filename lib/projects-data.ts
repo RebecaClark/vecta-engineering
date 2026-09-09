@@ -64,41 +64,40 @@ export const PROJECTS_DATA: ProjectItem[] = [
     materialSpec: "Concreto Autoadensável com Sílica Ativa C90/105"
   },
   {
-    id: "cantilever-pavilion",
-    ref: "REF. LU-09 // BALANÇO ESTRUTURAL",
-    category: "Infraestrutura Cultural",
-    title: "Cantilever Pavilion Z-9",
-    location: "Lago Lucerna, Suíça",
-    coordinates: "47°03'00\"N 8°18'20\"E",
-    year: "2023",
+    id: "escarpa-atlantica",
+    ref: "REF. SM-04 // BALANÇO GEOTÉCNICO",
+    category: "Centro de Monitoramento & Infraestrutura Tectônica",
+    title: "Complexo Escarpa Atlântica",
+    location: "Serra do Mar, São Paulo, Brasil",
+    coordinates: "23°51'42\"S 46°28'15\"W",
+    year: "2024",
     status: "Commissioned",
-    statusBadge: "COMISSIONADO · 2023",
+    statusBadge: "COMISSIONADO · 2024",
     description:
-      "Projeção horizontal livre de 38 metros sobre as águas de lago alpino, contrabalançada por tirantes subterrâneos protendidos perfurados diretamente em rocha granítica profunda.",
+      "Projeção horizontal livre de 42 metros sobre o abismo da Serra do Mar, engastada no maciço granítico profundo por tirantes protendidos de ultra-alta resistência contra escorregamentos tropicais.",
     fullNarrative:
-      "Desafiando a convenção gravitacional, o Pavilion Z-9 projeta-se 38 metros em balanço livre sobre águas alpinas. Em vez de apoios visíveis na margem, o momento de tombamento é resolvido por tendões de aço-carbono de alta resistência ancorados a 45 metros de profundidade no leito de granito, combinados a um amortecedor de massa líquida integrado para neutralizar a ressonância harmônica provocada pelo tráfego de pedestres.",
-    heroImage: "/images/cantilever_pavilion.jpg",
+      "Erguido a 780 metros de altitude sobre a densa escarpa da Mata Atlântica paulista, o Complexo Escarpa Atlântica projeta-se 42 metros em balanço livre sobre o vale. A resposta mecânica ao elevado momento de tombamento integra tirantes de aço protendido perfurados a 55 metros no maciço rochoso granítico e concreto UHPFRC reforçado com microfibras metálicas, complementados por uma rede profunda de drenagem subsuperficial para suportar o regime pluviométrico severo da serra (superior a 3.200 mm/ano).",
+    heroImage: "/images/escarpa_atlantica.jpg",
     gallery: [
-      "/images/cantilever_pavilion.jpg",
-      "/images/zurich_studio.jpg"
+      "/images/escarpa_atlantica.jpg"
     ],
     specs: [
-      { label: "Vão Livre em Balanço", value: "38,0 M sem Apoios" },
-      { label: "Profundidade de Ancoragem", value: "45 M no Granito" },
-      { label: "Força de Protensão", value: "24.000 kN por Tirante" },
-      { label: "Deflexão Máxima na Ponta", value: "Inferior a 14,5 MM" },
-      { label: "Amortecimento Harmônico", value: "Amortecedor Líquido (0,8Hz)" },
-      { label: "Blindagem Externa", value: "Liga de Titânio-Zinco" }
+      { label: "Vão Livre em Balanço", value: "42,0 M sem Apoios" },
+      { label: "Profundidade de Ancoragem", value: "55 M no Maciço Granítico" },
+      { label: "Força de Protensão", value: "28.000 kN por Tirante" },
+      { label: "Deflexão Máxima na Ponta", value: "Inferior a 11,2 MM" },
+      { label: "Drenagem Subsuperficial", value: "Sub-drenos Profundos (DHPs)" },
+      { label: "Blindagem Externa", value: "Liga de Titânio-Zinco e UHPFRC" }
     ],
     highlights: [
-      "Tirantes subterrâneos perfurados e ancorados em rocha granítica profunda",
-      "Cancelamento passivo de ressonância líquida na cavidade frontal do balanço",
-      "Validação cíclica térmica e sísmica completa segundo Eurocódigos 0-8",
-      "Vida útil de projeto de 200 anos com zero exposição corrosiva"
+      "Tirantes subterrâneos perfurados e ancorados em rocha granítica profunda da Serra do Mar",
+      "Matriz de concreto UHPFRC autoadensável com resistência característica fck ≥ 110 MPa",
+      "Monitoramento geológico e piezométrico contínuo integrado a gêmeo digital em tempo real",
+      "Vida útil de projeto de 150 anos com blindagem contra intemperismo tropical úmido"
     ],
-    feaTolerance: "±0,8 MM",
-    driftRatio: "L/2600 Ponta",
-    materialSpec: "Concreto Reforçado com Fibras de Ultra-Alto Desempenho (UHPFRC)"
+    feaTolerance: "±0,6 MM",
+    driftRatio: "L/3750 Ponta",
+    materialSpec: "Concreto Reforçado com Microfibras Metálicas de Ultra-Alto Desempenho (UHPFRC C110)"
   },
   {
     id: "meridian-viaduct",

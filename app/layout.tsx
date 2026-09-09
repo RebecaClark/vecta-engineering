@@ -44,6 +44,14 @@ export const metadata: Metadata = {
     "Engenharia Zurique",
   ],
   authors: [{ name: "Vecta Structural Engineering AG" }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: "https://vecta-engineering.com",
+  },
   openGraph: {
     title: "VECTA // Engenharia Estrutural e Civil AG",
     description: "A engenharia que ganha forma. Permanência monolítica em ambientes complexos.",
@@ -68,6 +76,43 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Vecta Engenharia Estrutural e Civil AG",
+  url: "https://vecta-engineering.com",
+  logo: "https://vecta-engineering.com/images/monogram.png",
+  description:
+    "Engenharia estrutural de altíssimo desempenho para infraestruturas monumentais, torres superaltas e grandes vãos.",
+  foundingDate: "1999",
+  address: [
+    {
+      "@type": "PostalAddress",
+      addressLocality: "Zurique",
+      addressCountry: "CH",
+    },
+    {
+      "@type": "PostalAddress",
+      addressLocality: "Londres",
+      addressCountry: "GB",
+    },
+    {
+      "@type": "PostalAddress",
+      addressLocality: "Nova York",
+      addressCountry: "US",
+    },
+  ],
+  sameAs: [],
+  areaServed: "Global",
+  knowsAbout: [
+    "Engenharia Estrutural",
+    "Análise de Elementos Finitos",
+    "Torres Superaltas",
+    "Engenharia Geotécnica",
+    "Concreto de Ultra-Alto Desempenho",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -78,10 +123,15 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} dark h-full bg-[#0d0e10]`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[#0d0e10] text-[#e3e2e5] font-sans antialiased selection:bg-[#c5a880] selection:text-[#281800]">
         {children}
       </body>
     </html>
   );
 }
-

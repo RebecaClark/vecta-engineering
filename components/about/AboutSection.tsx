@@ -33,9 +33,9 @@ export const AboutSection: React.FC = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="w-full border-b border-[#998f83]/20 bg-[#0d0e10] py-16 md:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 scroll-mt-20 md:scroll-mt-24"
+      className="w-full border-b border-white/10 bg-[#0d0e10] py-16 md:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-20 md:scroll-mt-24"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[1440px] xl:max-w-[1680px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Photography with Architectural Inset */}
           <div className="lg:col-span-6 relative about-anim">
@@ -80,7 +80,7 @@ export const AboutSection: React.FC = () => {
               <span className="font-mono text-[11px] text-[#c5a880] uppercase tracking-widest">
                 SEÇÃO 06 // CREDIBILIDADE INSTITUCIONAL
               </span>
-              <h2 className="font-space text-3xl sm:text-4xl md:text-5xl text-[#e3e2e5] font-medium tracking-tight leading-[1.08]">
+              <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl text-[#e3e2e5] font-medium tracking-tight leading-[1.08]">
                 Certeza Determinística Sobre Risco Especulativo.
               </h2>
             </div>

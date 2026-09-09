@@ -67,8 +67,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenDossier, isVisible = true 
 
         {/* Header Actions / Telemetry Node */}
         <div className="flex items-center gap-4 sm:gap-6">
-          <div className="hidden xl:flex items-center gap-2.5 font-mono text-[10px] text-[#8e9196] tracking-wider border-r border-[#4d463c]/50 pr-6">
+          <div className="hidden xl:flex items-center gap-3 font-mono text-[10px] text-[#8e9196] tracking-wider border-r border-[#4d463c]/50 pr-6">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-[#c5a880] font-semibold">PROJ REF: 41°53&apos;11&quot;N 87°38&apos;15&quot;W</span>
+            <span className="text-[#4d463c]">//</span>
             <span className="text-[#e3e2e5]">NÓ DE BERNA [CHE-109]</span>
           </div>
 

@@ -44,16 +44,16 @@ export const ProjectsSection: React.FC = () => {
     <section
       id="featured-works"
       ref={sectionRef}
-      className="w-full border-b border-[#998f83]/20 bg-[#0d0e10] py-16 md:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 scroll-mt-20 md:scroll-mt-24"
+      className="w-full border-b border-white/10 bg-[#0d0e10] py-16 md:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-20 md:scroll-mt-24"
     >
-      <div className="max-w-[1440px] mx-auto flex flex-col space-y-16">
+      <div className="max-w-[1440px] xl:max-w-[1680px] mx-auto flex flex-col space-y-16">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#998f83]/20 pb-8 project-anim">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8 project-anim">
           <div className="space-y-2">
-            <span className="font-mono text-[11px] text-[#c5a880] uppercase tracking-widest">
+            <span className="font-mono text-[11px] text-[#c5a880] uppercase tracking-widest font-semibold">
               SEÇÃO 03 // GRANDES OBRAS
             </span>
-            <h2 className="font-space text-3xl sm:text-4xl md:text-5xl text-[#e3e2e5] font-medium tracking-tight">
+            <h2 className="font-headline text-3xl sm:text-4xl md:text-5xl text-[#e3e2e5] font-medium tracking-tight">
               Obras Estruturais Selecionadas
             </h2>
           </div>

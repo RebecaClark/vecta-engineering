@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
+import { TextReveal } from "@/components/ui/TextReveal";
 import { getGSAP } from "@/lib/gsap";
 
 export const Manifesto: React.FC = () => {
@@ -31,9 +32,9 @@ export const Manifesto: React.FC = () => {
     <section
       id="manifesto"
       ref={containerRef}
-      className="w-full border-b border-[#998f83]/20 bg-[#0d0e10] py-16 md:py-24 lg:py-32 px-4 sm:px-8 lg:px-12 scroll-mt-20 md:scroll-mt-24"
+      className="w-full border-b border-[#998f83]/15 bg-[#0d0e10] py-20 md:py-24 lg:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-20 md:scroll-mt-24 relative"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[1440px] xl:max-w-[1680px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
           {/* Left Column: Architectural Datum & Section Tag */}
           <div className="lg:col-span-4 flex flex-col space-y-8 lg:sticky lg:top-28 manifesto-anim">
@@ -45,7 +46,7 @@ export const Manifesto: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              <div className="p-6 border border-[#998f83]/30 bg-[#121417]">
+              <div className="p-6 border border-[#998f83]/30 bg-[#121417] shadow-xl">
                 <div className="flex items-center justify-between pb-3 border-b border-[#998f83]/20">
                   <span className="font-mono text-[10px] text-[#8e9196] uppercase tracking-wider">
                     PRINCÍPIO FUNDAMENTAL
@@ -65,9 +66,12 @@ export const Manifesto: React.FC = () => {
 
           {/* Right Column: Expansive Typographic Statement */}
           <div className="lg:col-span-8 flex flex-col space-y-10 manifesto-anim">
-            <h2 className="font-space text-3xl sm:text-4xl md:text-5xl text-[#e3e2e5] font-medium tracking-tight max-w-3xl leading-[1.08]">
+            <TextReveal
+              as="h2"
+              className="font-headline text-3xl md:text-5xl lg:text-6xl text-[#e3e2e5] font-medium tracking-tight max-w-4xl leading-[1.04]"
+            >
               Grandes estruturas começam muito antes da construção. Elas emergem na resolução serena de cargas extremas.
-            </h2>
+            </TextReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6 border-t border-[#998f83]/20">
               <p className="font-sans text-base sm:text-lg text-[#d1c5b8] leading-relaxed font-light">

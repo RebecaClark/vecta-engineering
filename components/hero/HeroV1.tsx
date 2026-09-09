@@ -61,7 +61,6 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
   const isHeroRevealed = externalRevealed ?? internalRevealed;
 
   const [activeStage, setActiveStage] = useState(0);
-  const [currentTime, setCurrentTime] = useState(0);
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
   const [isVideoMuted, setIsVideoMuted] = useState(true);
   const videoHandleRef = useRef<HeroVideoHandle | null>(null);
@@ -89,25 +88,26 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
   };
 
   const handleTimeUpdate = (curTime: number) => {
-    setCurrentTime(curTime);
-
     // Automatic reveal trigger at 21 seconds (1 second before video completion)
     if (curTime >= 21.0 && !isHeroRevealed) {
       revealHero();
     }
 
-    // Map stages for the telemetry HUD
+    // Map stages for the telemetry HUD - only update state when stage actually changes
+    let nextStage = 0;
     if (curTime < 4.0) {
-      setActiveStage(0);
+      nextStage = 0;
     } else if (curTime < 9.0) {
-      setActiveStage(1);
+      nextStage = 1;
     } else if (curTime < 14.0) {
-      setActiveStage(2);
+      nextStage = 2;
     } else if (curTime < 19.0) {
-      setActiveStage(3);
+      nextStage = 3;
     } else {
-      setActiveStage(4);
+      nextStage = 4;
     }
+
+    setActiveStage((prev) => (prev !== nextStage ? nextStage : prev));
   };
 
   const handleSelectStage = (index: number) => {
@@ -128,13 +128,13 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
     }
   };
 
-  // Find active phrase during intro
-  const currentPhrase = CINEMATIC_PHRASES.find(
-    (p) => currentTime >= p.start && currentTime < p.end
-  ) || CINEMATIC_PHRASES[0];
+  // Find active phrase during intro based on activeStage
+  const currentPhrase =
+    CINEMATIC_PHRASES[Math.min(activeStage, CINEMATIC_PHRASES.length - 1)] ||
+    CINEMATIC_PHRASES[0];
 
   return (
-    <section className="relative w-full min-h-[100svh] lg:h-[100svh] h-auto flex flex-col justify-between pt-20 sm:pt-24 pb-4 sm:pb-8 px-4 sm:px-8 lg:px-12 border-b border-[#998f83]/20 bg-[#0d0e10] overflow-hidden">
+    <section className="relative w-full min-h-[100svh] lg:h-[100svh] h-auto flex flex-col justify-between pt-20 sm:pt-24 pb-4 sm:pb-8 px-4 sm:px-8 lg:px-12 xl:px-16 bg-[#0d0e10] overflow-hidden">
       {/* Background Universal Video with Live Synchronization */}
       <HeroVideo
         ref={videoHandleRef}
@@ -147,7 +147,7 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
       {/* CINEMATIC INTRO MODE: LATERAL EDITORIAL PHRASES (0s to 21s)              */}
       {/* ========================================================================= */}
       <div
-        className={`relative z-20 w-full max-w-[1440px] mx-auto my-auto transition-all duration-1000 ${
+        className={`relative z-20 w-full max-w-[1440px] xl:max-w-[1680px] mx-auto my-auto transition-all duration-1000 ${
           !isHeroRevealed ? "opacity-100 pointer-events-auto translate-x-0" : "opacity-0 pointer-events-none -translate-x-8 absolute"
         }`}
       >
@@ -180,10 +180,10 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
 
       {/* Discreet Skip Action during Intro */}
       {!isHeroRevealed && (
-        <div className="relative z-20 w-full max-w-[1440px] mx-auto pb-4 flex items-center justify-between font-mono text-[10px] text-[#8e9196] uppercase tracking-widest">
+        <div className="relative z-20 w-full max-w-[1440px] xl:max-w-[1680px] mx-auto pb-4 flex items-center justify-between font-mono text-[10px] text-[#8e9196] uppercase tracking-widest">
           <div className="flex items-center gap-3 bg-[#0d0e10]/60 backdrop-blur-md px-3 py-1.5 border border-[#4d463c]/40">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>SEQUÊNCIA CINEMATOGRÁFICA EM CURSO ({currentTime.toFixed(0)}s / 21s)</span>
+            <span>SEQUÊNCIA CINEMATOGRÁFICA EM CURSO (ETAPA {activeStage + 1} / 5)</span>
           </div>
 
           <button
@@ -202,7 +202,7 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
       {/* ========================================================================= */}
       {/* 1. Top Telemetry Row */}
       <div
-        className={`relative z-10 w-full max-w-[1440px] mx-auto pt-2 flex flex-wrap items-center justify-between gap-4 border-b border-[#998f83]/20 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#8e9196] transition-all duration-1000 ease-out ${
+        className={`relative z-10 w-full max-w-[1440px] xl:max-w-[1680px] mx-auto pt-2 flex flex-wrap items-center justify-between gap-4 border-b border-[#998f83]/15 pb-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#8e9196] transition-all duration-1000 ease-out ${
           isHeroRevealed ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
@@ -220,7 +220,7 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
 
       {/* 2. Center/Main Hero Monolith Header */}
       <div
-        className={`relative z-10 w-full max-w-[1440px] mx-auto my-auto py-4 sm:py-6 transition-all duration-1000 ease-out ${
+        className={`relative z-10 w-full max-w-[1440px] xl:max-w-[1680px] mx-auto my-auto py-4 sm:py-6 transition-all duration-1000 ease-out ${
           isHeroRevealed ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-6 pointer-events-none hidden"
         }`}
       >
@@ -247,8 +247,8 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
 
           {/* Right Column: Tectonic Evolution Controller & CTAs */}
           <div className="lg:col-span-4 flex flex-col space-y-4 sm:space-y-6 lg:items-end">
-{/* Progression Mini-Selector */}
-            <div className="hidden lg:block w-full max-w-sm bg-[#0d0e10]/85 backdrop-blur-md p-3.5 sm:p-4 border border-[#998f83]/30">
+            {/* Progression Mini-Selector */}
+            <div className="w-full max-w-sm bg-[#0d0e10]/85 backdrop-blur-md p-3.5 sm:p-4 border border-[#998f83]/30">
               <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#998f83]/20">
                 <span className="font-mono text-[10px] text-[#8e9196] uppercase tracking-wider">
                   EVOLUÇÃO TECTÔNICA
@@ -314,7 +314,7 @@ export const HeroV1: React.FC<HeroV1Props> = ({ onHeroReveal, isHeroRevealed: ex
 
       {/* 3. Bottom Datum Bar with Scroll Indicator & Integrated Video Controller */}
       <div
-        className={`relative z-10 w-full max-w-[1440px] mx-auto pb-2 flex flex-col sm:flex-row items-start sm:items-end justify-between border-t border-[#998f83]/20 pt-3 sm:pt-4 gap-3 sm:gap-4 transition-all duration-1000 ease-out ${
+        className={`relative z-10 w-full max-w-[1440px] xl:max-w-[1680px] mx-auto pb-2 flex flex-col sm:flex-row items-start sm:items-end justify-between border-t border-[#998f83]/15 pt-3 sm:pt-4 gap-3 sm:gap-4 transition-all duration-1000 ease-out ${
           isHeroRevealed ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none hidden"
         }`}
       >

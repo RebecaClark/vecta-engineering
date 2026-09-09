@@ -17,10 +17,10 @@ export const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="w-full bg-[#0d0e10] text-[#e3e2e5] pt-16 pb-16 md:pb-24 px-4 sm:px-8 lg:px-12 border-t border-[#998f83]/20">
-      <div className="max-w-[1440px] mx-auto flex flex-col space-y-12">
+    <footer className="w-full bg-[#0a0b0d] text-[#e3e2e5] pt-16 pb-16 md:pb-24 px-4 sm:px-8 lg:px-12 xl:px-16 border-t border-white/10">
+      <div className="max-w-[1440px] xl:max-w-[1680px] mx-auto flex flex-col space-y-12">
         {/* Top Monogram & Accreditation Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-[#998f83]/20 pb-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/10 pb-8">
           <div className="flex items-center gap-4">
             <div className="relative w-8 h-8 shrink-0 p-0.5 border border-[#4d463c] bg-[#121417]">
               <Image
